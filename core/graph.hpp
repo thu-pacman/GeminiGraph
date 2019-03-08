@@ -31,6 +31,7 @@ Copyright (c) 2015-2016 Xiaowei Zhu, Tsinghua University
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <functional>
 
 #include "core/atomic.hpp"
 #include "core/bitmap.hpp"
