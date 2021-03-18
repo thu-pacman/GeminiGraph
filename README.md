@@ -21,8 +21,7 @@ The input parameters of these applications are as follows:
 ./toolkits/bc [path] [vertices] [root]
 ```
 
-*[path]* gives the path of an input graph, i.e. a file stored on a *shared* file system, consisting of *|E|* \<source vertex id, destination vertex id, edge data\> tuples in binary.
-*[vertices]* gives the number of vertices *|V|*. Vertex IDs are represented with 32-bit integers and edge data can be omitted for unweighted graphs (e.g. the above applications except SSSP).
+*[path]* gives the path of an input graph, i.e. a file stored on a *shared* file system, consisting of *|E|* \<source vertex id, destination vertex id, edge data\> tuples in binary. You can use sample data in `sample-data`, it's in csv format, you can use `./toolktits/convert_csv_to_binary ./sample.csv` to transform it to binary format. *[vertices]* gives the number of vertices *|V|*. Vertex IDs are represented with 32-bit integers and edge data can be omitted for unweighted graphs (e.g. the above applications except SSSP).
 Note: CC makes the input graph undirected by adding a reversed edge to the graph for each loaded one; SSSP uses *float* as the type of weights.
 
 If Slurm is installed on the cluster, you may run jobs like this, e.g. 20 iterations of PageRank on the *twitter-2010* graph:
