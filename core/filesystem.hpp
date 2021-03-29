@@ -23,7 +23,11 @@ Copyright (c) 2015-2016 Xiaowei Zhu, Tsinghua University
 #include <errno.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <string>
 
+// 这里就是简单检查文件是否存在以及文件的大小
+// 注意输入文件是二进制格式的，没有空隙，
+// 所以这里获取的文件大小才能用于后面的计算
 inline bool file_exists(std::string filename) {
   struct stat st;
   return stat(filename.c_str(), &st)==0;
