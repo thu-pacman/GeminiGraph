@@ -14,6 +14,8 @@ Copyright (c) 2015-2016 Xiaowei Zhu, Tsinghua University
    limitations under the License.
 */
 
+// 定义原子操作，使用CAS来更新对应的值
+// 本质上来说，也是封装了系统库的__sync_bool_compare_and_swap之类的函数
 #ifndef ATOMIC_HPP
 #define ATOMIC_HPP
 

@@ -21,7 +21,10 @@ Copyright (c) 2015-2016 Xiaowei Zhu, Tsinghua University
 #include <stdlib.h>
 #include <assert.h>
 #include <mpi.h>
-
+/**
+ * 获取与输入T类型对应的一个MPI数据类型
+ * 仅仅支持 char, unsigned char, int, long, unsigned long, float, double等类型
+ */
 template <typename T>
 MPI_Datatype get_mpi_data_type() {
   if (std::is_same<T, char>::value) {
@@ -46,11 +49,14 @@ MPI_Datatype get_mpi_data_type() {
   }
 }
 
+// 定义MPI编程相关的变量，可以认为MPI构建了一个集群
+// partition_id就是节点在集群中的编号，从0开始
+// partitions就是集群中节点的个数
 class MPI_Instance {
   int partition_id;
   int partitions;
 public:
-  MPI_Instance(int * argc, char *** argv) {
+  MPI_Instance(int * argc, char *** argv) { // 这里对应的是main函数里面的argc和argv的指针
     int provided;
     MPI_Init_thread(argc, argv, MPI_THREAD_MULTIPLE, &provided);
     MPI_Comm_rank(MPI_COMM_WORLD, &partition_id);
@@ -73,9 +79,13 @@ public:
     }
     #endif
   }
+
+  // 析构函数，执行清理工作
   ~MPI_Instance() {
     MPI_Finalize();
   }
+
+  // 进行信息交换，然后同步数据，这里就是BSP模型中的栅栏步骤
   void pause() {
     if (partition_id==0) {
       getchar();

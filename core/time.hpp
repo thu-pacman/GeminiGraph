@@ -19,9 +19,15 @@ Copyright (c) 2015-2016 Xiaowei Zhu, Tsinghua University
 
 #include <sys/time.h>
 
+/**
+ * 获取当前时间
+ * tv_sec为从1970-1-1零点零分到创建struct timeval时的秒数，tv_usec为微秒数
+ */
 inline double get_time() {
   struct timeval tv;
-  gettimeofday(&tv, NULL);
+  // C++ 11里面并不推荐使用NULL来表示空指针，最好是使用nullptr
+  // gettimeofday(&tv, NULL);
+  gettimeofday(&tv, nullptr);
   return tv.tv_sec + (tv.tv_usec / 1e6);
 }
 

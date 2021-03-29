@@ -14,10 +14,16 @@ Copyright (c) 2015-2016 Xiaowei Zhu, Tsinghua University
    limitations under the License.
 */
 
+// 定义了用到的常量
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-#define CHUNKSIZE (1<<20)
+// CHUNKSIZE 表示划分的大小
+// 1 << 20 => 1048576，即百万级别
+#define CHUNKSIZE (1 << 20)
+
+// PAGESIZE 表示单页大小
+// 1 << 12 => 4096
 #define PAGESIZE (1<<12)
 
 #endif
