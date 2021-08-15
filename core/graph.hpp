@@ -164,12 +164,13 @@ public:
     assert( numa_available() != -1 );
     assert( sizeof(unsigned long) == 8 ); // assume unsigned long is 64-bit
 
-    char nodestring[sockets*2+1];
+    char nodestring[sockets*2];
     nodestring[0] = '0';
     for (int s_i=1;s_i<sockets;s_i++) {
       nodestring[s_i*2-1] = ',';
       nodestring[s_i*2] = '0'+s_i;
     }
+    nodestring[sockets*2-1] = '\0';
     struct bitmask * nodemask = numa_parse_nodestring(nodestring);
     numa_set_interleave_mask(nodemask);
 
@@ -238,7 +239,7 @@ public:
 
   // deallocate a vertex array
   template<typename T>
-  T * dealloc_vertex_array(T * array) {
+  void dealloc_vertex_array(T * array) {
     numa_free(array, sizeof(T) * vertices);
   }
 
